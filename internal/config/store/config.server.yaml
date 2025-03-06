@@ -1,18 +1,10 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
-package: store
-output: ../gen/models.gen.go
+package: gen_store
+output: ../../gen/store/store_server.go
 generate:
-  models: true
+  gin-server: true
 output-options:
   # to make sure that all types are generated
   skip-prune: true
   include-tags:
     - store
-  exclude-schemas:
-    - Pet
-    - Category
-    - Tag
-    - Customer
-    - Address
-    - User
-    - ApiResponse

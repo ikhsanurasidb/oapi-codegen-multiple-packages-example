@@ -1,16 +1,10 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
-package: pet
-output: ../gen/models.gen.go
+package: gen_user
+output: ../../gen/user/user_server.go
 generate:
-  models: true
+  gin-server: true
 output-options:
   # to make sure that all types are generated
   skip-prune: true
   include-tags:
-    - pet
-  exclude-schemas:
-    - Customer
-    - Address
-    - Order
-    - User
-    - UserArray
+    - user
