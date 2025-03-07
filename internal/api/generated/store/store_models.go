@@ -18,6 +18,13 @@ const (
 	Placed    OrderStatus = "placed"
 )
 
+// ApiResponse defines model for ApiResponse.
+type ApiResponse struct {
+	Code    *int32  `json:"code,omitempty"`
+	Message *string `json:"message,omitempty"`
+	Type    *string `json:"type,omitempty"`
+}
+
 // Order defines model for Order.
 type Order struct {
 	Complete *bool      `json:"complete,omitempty"`

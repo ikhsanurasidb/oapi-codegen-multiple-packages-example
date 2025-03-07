@@ -11,6 +11,7 @@ require (
 	github.com/go-sql-driver/mysql v1.9.0
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/oapi-codegen/runtime v1.1.1
+	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
@@ -56,5 +57,4 @@ require (
 	golang.org/x/tools v0.21.1-0.20240508182429-e35e4ccd0d2d // indirect
 	google.golang.org/protobuf v1.36.5 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

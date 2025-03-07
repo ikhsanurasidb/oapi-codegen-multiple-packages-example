@@ -38,9 +38,6 @@ services:
       - STORE_DB_USER=user1
       - STORE_DB_PASSWORD=12345678
       - STORE_DB_DATABASE=pet_store
-    depends_on:
-      migrate:
-        condition: service_completed_successfully
     networks:
       - pet_store_network
 

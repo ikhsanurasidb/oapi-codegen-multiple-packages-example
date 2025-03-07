@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	gen_store "github.com/oapi-codegen-multiple-packages-example/internal/gen/store"
+	gen_store "github.com/oapi-codegen-multiple-packages-example/internal/api/generated/store"
 	"github.com/oapi-codegen-multiple-packages-example/internal/service/store"
 )
 

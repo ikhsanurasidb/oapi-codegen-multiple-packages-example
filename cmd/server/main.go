@@ -12,7 +12,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/oapi-codegen-multiple-packages-example/config"
-	gen_store "github.com/oapi-codegen-multiple-packages-example/internal/gen/store"
+	gen_store "github.com/oapi-codegen-multiple-packages-example/internal/api/generated/store"
 	store_handler "github.com/oapi-codegen-multiple-packages-example/internal/handler/store"
 	store_repository "github.com/oapi-codegen-multiple-packages-example/internal/repository/store"
 	store_service "github.com/oapi-codegen-multiple-packages-example/internal/service/store"
