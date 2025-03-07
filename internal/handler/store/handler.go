@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	gen_store "github.com/oapi-codegen-multiple-packages-example/internal/api/generated/store"
+	store_dto "github.com/oapi-codegen-multiple-packages-example/internal/dto/store"
 	"github.com/oapi-codegen-multiple-packages-example/internal/service/store"
 )
 
@@ -32,7 +32,7 @@ func (h *Handler) GetInventory(c *gin.Context) {
 }
 
 func (h *Handler) PlaceOrder(c *gin.Context) {
-	var order gen_store.Order
+	var order store_dto.Order
 
 	if err := c.ShouldBindJSON(&order); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid order data"})

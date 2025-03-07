@@ -1,0 +1,59 @@
+pet-server:
+  generate:
+    gin-server: true
+  package: pet
+  output: ../server/pet/pet_server.go
+  import-mapping:
+    pet.yaml: github.com/oapi-codegen-multiple-packages-example/internal/dto/pet/pet_dto
+  output-options:
+    skip-prune: true
+    include-tags:
+      - pet
+
+pet-models:
+  generate:
+    models: true
+  package: pet_dto
+  output: ../dto/pet/pet_dto.go
+  output-options:
+    skip-prune: true
+
+store-server:
+  generate:
+    gin-server: true
+  package: store
+  output: ../server/store/store_server.go
+  import-mapping:
+    store.yaml: github.com/oapi-codegen-multiple-packages-example/internal/dto/store/store_dto
+  output-options:
+    skip-prune: true
+    include-tags:
+      - store
+
+store-models:
+  generate:
+    models: true
+  package: store_dto
+  output: ../dto/store/store_dto.go
+  output-options:
+    skip-prune: true
+
+user-server:
+  generate:
+    gin-server: true
+  package: user
+  output: ../server/user/user_server.go
+  import-mapping:
+    user.yaml: github.com/oapi-codegen-multiple-packages-example/internal/dto/user/user_dto
+  output-options:
+    skip-prune: true
+    include-tags:
+      - user
+
+user-models:
+  generate:
+    models: true
+  package: user_dto
+  output: ../dto/user/user_dto.go
+  output-options:
+    skip-prune: true

@@ -6,12 +6,12 @@ import (
 	"fmt"
 	"time"
 
-	gen_store "github.com/oapi-codegen-multiple-packages-example/internal/api/generated/store"
+	store_dto "github.com/oapi-codegen-multiple-packages-example/internal/dto/store"
 )
 
 type Repository interface {
-	CreateOrder(ctx context.Context, order gen_store.Order) (*gen_store.Order, error)
-	GetOrderByID(ctx context.Context, orderID int64) (*gen_store.Order, error)
+	CreateOrder(ctx context.Context, order store_dto.Order) (*store_dto.Order, error)
+	GetOrderByID(ctx context.Context, orderID int64) (*store_dto.Order, error)
 	DeleteOrder(ctx context.Context, orderID int64) error
 
 	GetInventory(ctx context.Context) (map[string]int32, error)
@@ -25,7 +25,7 @@ func NewRepository(db *sql.DB) Repository {
 	return &mysqlRepository{db: db}
 }
 
-func (r *mysqlRepository) CreateOrder(ctx context.Context, order gen_store.Order) (*gen_store.Order, error) {
+func (r *mysqlRepository) CreateOrder(ctx context.Context, order store_dto.Order) (*store_dto.Order, error) {
 	query := `INSERT INTO orders (pet_id, quantity, ship_date, status, complete) 
               VALUES (?, ?, ?, ?, ?)`
 
@@ -72,7 +72,7 @@ func (r *mysqlRepository) CreateOrder(ctx context.Context, order gen_store.Order
 	return &order, nil
 }
 
-func (r *mysqlRepository) GetOrderByID(ctx context.Context, orderID int64) (*gen_store.Order, error) {
+func (r *mysqlRepository) GetOrderByID(ctx context.Context, orderID int64) (*store_dto.Order, error) {
 	query := `SELECT id, pet_id, quantity, ship_date, status, complete FROM orders WHERE id = ?`
 
 	var (
@@ -92,7 +92,7 @@ func (r *mysqlRepository) GetOrderByID(ctx context.Context, orderID int64) (*gen
 		return nil, fmt.Errorf("failed to get order: %w", err)
 	}
 
-	order := gen_store.Order{
+	order := store_dto.Order{
 		Id: &id,
 	}
 
@@ -109,7 +109,7 @@ func (r *mysqlRepository) GetOrderByID(ctx context.Context, orderID int64) (*gen
 	}
 
 	if status.Valid {
-		orderStatus := gen_store.OrderStatus(status.String)
+		orderStatus := store_dto.OrderStatus(status.String)
 		order.Status = &orderStatus
 	}
 

@@ -4,13 +4,13 @@ import (
 	"context"
 	"errors"
 
-	gen_store "github.com/oapi-codegen-multiple-packages-example/internal/api/generated/store"
+	store_dto "github.com/oapi-codegen-multiple-packages-example/internal/dto/store"
 	"github.com/oapi-codegen-multiple-packages-example/internal/repository/store"
 )
 
 type Service interface {
-    CreateOrder(ctx context.Context, order gen_store.Order) (*gen_store.Order, error)
-    GetOrderByID(ctx context.Context, orderID int64) (*gen_store.Order, error)
+    CreateOrder(ctx context.Context, order store_dto.Order) (*store_dto.Order, error)
+    GetOrderByID(ctx context.Context, orderID int64) (*store_dto.Order, error)
     DeleteOrder(ctx context.Context, orderID int64) error
     GetInventory(ctx context.Context) (map[string]int32, error)
 }
@@ -25,20 +25,20 @@ func NewService(repo store.Repository) Service {
     }
 }
 
-func (s *storeService) CreateOrder(ctx context.Context, order gen_store.Order) (*gen_store.Order, error) {
+func (s *storeService) CreateOrder(ctx context.Context, order store_dto.Order) (*store_dto.Order, error) {
     if order.PetId == nil {
         return nil, errors.New("pet ID is required")
     }
     
     if order.Status == nil {
-        status := gen_store.Placed
+        status := store_dto.Placed
         order.Status = &status
     }
     
     return s.repo.CreateOrder(ctx, order)
 }
 
-func (s *storeService) GetOrderByID(ctx context.Context, orderID int64) (*gen_store.Order, error) {
+func (s *storeService) GetOrderByID(ctx context.Context, orderID int64) (*store_dto.Order, error) {
     order, err := s.repo.GetOrderByID(ctx, orderID)
     if err != nil {
         return nil, err
