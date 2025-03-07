@@ -40,7 +40,7 @@ func main() {
 	}
 	defer os.RemoveAll(tempDir)
 
-	// Process each top-level configuration (module1_server, module1_models, etc)
+	// Process each top-level prop of config.yaml (module1_server, module1_models, etc)
 	for name, config := range configs {
 		if outputPath, ok := config["output"].(string); ok {
 			if !filepath.IsAbs(outputPath) {

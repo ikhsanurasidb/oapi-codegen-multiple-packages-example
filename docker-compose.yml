@@ -26,10 +26,15 @@ services:
       - pet_store_network
 
   server:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: golang:1.24.0-alpine
     container_name: pet_store_server
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: >
+      sh -c "go mod download &&
+             go build -o server ./cmd/server &&
+             ./server"
     ports:
       - "8080:8080"
     environment:
@@ -40,6 +45,9 @@ services:
       - STORE_DB_DATABASE=pet_store
     networks:
       - pet_store_network
+    depends_on:
+      mysql:
+        condition: service_healthy
 
 volumes:
   mysql_data:
