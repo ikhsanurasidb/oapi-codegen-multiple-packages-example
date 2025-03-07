@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: pet_store_mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: pet_store
+      MYSQL_USER: user1
+      MYSQL_PASSWORD: 12345678
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "user1", "-p12345678"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+    networks:
+      - pet_store_network
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pet_store_server
+    ports:
+      - "8080:8080"
+    environment:
+      - STORE_DB_HOST=mysql
+      - STORE_DB_PORT=3306
+      - STORE_DB_USER=user1
+      - STORE_DB_PASSWORD=12345678
+      - STORE_DB_DATABASE=pet_store
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    networks:
+      - pet_store_network
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  pet_store_network:
+    driver: bridge

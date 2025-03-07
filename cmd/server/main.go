@@ -21,10 +21,8 @@ import (
 )
 
 func main() {
-	// Load configuration
 	cfg := config.Get()
 
-	// Initialize MySQL connection
 	db, err := mysql.NewConnection(mysql.Config{
 		Host:     cfg.MySQL.Host,
 		Port:     cfg.MySQL.Port,
