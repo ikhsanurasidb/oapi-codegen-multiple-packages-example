@@ -69,7 +69,7 @@ func main() {
 			log.Fatalf("Error writing temp config for %s: %v", name, err)
 		}
 
-		cmd := exec.Command("go", "run", "github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen",
+		cmd := exec.Command("go", "tool", "github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen",
 			"-config", tempConfigPath, openapiPath)
 
 		cmd.Stdout = os.Stdout

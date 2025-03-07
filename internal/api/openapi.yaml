@@ -3,7 +3,14 @@ servers:
   - url: /v3
 info:
   description: |-
-    This is a sample Pet Store Server based on the OpenAPI 3.0 specification.
+    This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about
+    Swagger at [http://swagger.io](http://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!
+    You can now help us improve the API whether it's by making changes to the definition itself or to the code.
+    That way, with time, we can improve the API in general, and expose some of the new features in OAS3.
+
+    Some useful links:
+    - [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)
+    - [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)
   version: 1.0.20-SNAPSHOT
   title: Swagger Petstore - OpenAPI 3.0
   termsOfService: 'http://swagger.io/terms/'
@@ -15,8 +22,14 @@ info:
 tags:
   - name: pet
     description: Everything about your Pets
+    externalDocs:
+      description: Find out more
+      url: 'http://swagger.io'
   - name: store
     description: Access to Petstore orders
+    externalDocs:
+      description: Find out more about our store
+      url: 'http://swagger.io'
   - name: user
     description: Operations about user
 paths:
@@ -31,9 +44,12 @@ paths:
         '200':
           description: Successful operation
           content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Pet'
             application/json:
               schema:
-                $ref: 'pet.yaml#/components/schemas/Pet'
+                $ref: '#/components/schemas/Pet'
         '405':
           description: Invalid input
       security:
@@ -46,7 +62,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: 'pet.yaml#/components/schemas/Pet'
+              $ref: '#/components/schemas/Pet'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Pet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Pet'
     put:
       tags:
         - pet
@@ -57,9 +79,12 @@ paths:
         '200':
           description: Successful operation
           content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Pet'
             application/json:
               schema:
-                $ref: 'pet.yaml#/components/schemas/Pet'
+                $ref: '#/components/schemas/Pet'
         '400':
           description: Invalid ID supplied
         '404':
@@ -76,7 +101,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: 'pet.yaml#/components/schemas/Pet'
+              $ref: '#/components/schemas/Pet'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Pet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Pet'
   /pet/findByStatus:
     get:
       tags:
@@ -101,11 +132,16 @@ paths:
         '200':
           description: successful operation
           content:
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: 'pet.yaml#/components/schemas/Pet'
+                  $ref: '#/components/schemas/Pet'
         '400':
           description: Invalid status value
       security:
@@ -117,7 +153,9 @@ paths:
       tags:
         - pet
       summary: Finds Pets by tags
-      description: Multiple tags can be provided with comma separated strings
+      description: >-
+        Multiple tags can be provided with comma separated strings. Use tag1,
+        tag2, tag3 for testing.
       operationId: findPetsByTags
       parameters:
         - name: tags
@@ -133,11 +171,16 @@ paths:
         '200':
           description: successful operation
           content:
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: 'pet.yaml#/components/schemas/Pet'
+                  $ref: '#/components/schemas/Pet'
         '400':
           description: Invalid tag value
       security:
@@ -163,9 +206,12 @@ paths:
         '200':
           description: successful operation
           content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Pet'
             application/json:
               schema:
-                $ref: 'pet.yaml#/components/schemas/Pet'
+                $ref: '#/components/schemas/Pet'
         '400':
           description: Invalid ID supplied
         '404':
@@ -179,6 +225,7 @@ paths:
       tags:
         - pet
       summary: Updates a pet in the store with form data
+      description: ''
       operationId: updatePetWithForm
       parameters:
         - name: petId
@@ -209,6 +256,7 @@ paths:
       tags:
         - pet
       summary: Deletes a pet
+      description: ''
       operationId: deletePet
       parameters:
         - name: api_key
@@ -236,6 +284,7 @@ paths:
       tags:
         - pet
       summary: uploads an image
+      description: ''
       operationId: uploadFile
       parameters:
         - name: petId
@@ -257,7 +306,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'pet.yaml#/components/schemas/ApiResponse'
+                $ref: '#/components/schemas/ApiResponse'
       security:
         - petstore_auth:
             - 'write:pets'
@@ -275,6 +324,7 @@ paths:
       summary: Returns pet inventories by status
       description: Returns a map of status codes to quantities
       operationId: getInventory
+      x-swagger-router-controller: OrderController
       responses:
         '200':
           description: successful operation
@@ -294,26 +344,36 @@ paths:
       summary: Place an order for a pet
       description: Place a new order in the store
       operationId: placeOrder
+      x-swagger-router-controller: OrderController
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: 'store.yaml#/components/schemas/Order'
+                $ref: '#/components/schemas/Order'
         '405':
           description: Invalid input
       requestBody:
         content:
           application/json:
             schema:
-              $ref: 'store.yaml#/components/schemas/Order'
+              $ref: '#/components/schemas/Order'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Order'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Order'
   '/store/order/{orderId}':
     get:
       tags:
         - store
       summary: Find purchase order by ID
-      description: For valid response try integer IDs with value <= 5 or > 10
+      x-swagger-router-controller: OrderController
+      description: >-
+        For valid response try integer IDs with value <= 5 or > 10. Other values
+        will generate exceptions.
       operationId: getOrderById
       parameters:
         - name: orderId
@@ -327,9 +387,12 @@ paths:
         '200':
           description: successful operation
           content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Order'
             application/json:
               schema:
-                $ref: 'store.yaml#/components/schemas/Order'
+                $ref: '#/components/schemas/Order'
         '400':
           description: Invalid ID supplied
         '404':
@@ -338,7 +401,10 @@ paths:
       tags:
         - store
       summary: Delete purchase order by ID
-      description: For valid response try integer IDs with value < 1000
+      x-swagger-router-controller: OrderController
+      description: >-
+        For valid response try integer IDs with value < 1000. Anything above
+        1000 or nonintegers will generate API errors
       operationId: deleteOrder
       parameters:
         - name: orderId
@@ -366,12 +432,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'user.yaml#/components/schemas/User'
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: 'user.yaml#/components/schemas/User'
+              $ref: '#/components/schemas/User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
         description: Created user object
   /user/createWithList:
     post:
@@ -379,14 +454,18 @@ paths:
         - user
       summary: Creates list of users with given input array
       description: 'Creates list of users with given input array'
+      x-swagger-router-controller: UserController
       operationId: createUsersWithListInput
       responses:
         '200':
           description: Successful operation
           content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
             application/json:
               schema:
-                $ref: 'user.yaml#/components/schemas/User'
+                $ref: '#/components/schemas/User'
         default:
           description: successful operation
       requestBody:
@@ -395,12 +474,13 @@ paths:
             schema:
               type: array
               items:
-                $ref: 'user.yaml#/components/schemas/User'
+                $ref: '#/components/schemas/User'
   /user/login:
     get:
       tags:
         - user
       summary: Logs user into the system
+      description: ''
       operationId: loginUser
       parameters:
         - name: username
@@ -430,6 +510,9 @@ paths:
                 type: string
                 format: date-time
           content:
+            application/xml:
+              schema:
+                type: string
             application/json:
               schema:
                 type: string
@@ -440,7 +523,9 @@ paths:
       tags:
         - user
       summary: Logs out current logged in user session
+      description: ''
       operationId: logoutUser
+      parameters: []
       responses:
         default:
           description: successful operation
@@ -449,11 +534,12 @@ paths:
       tags:
         - user
       summary: Get user by user name
+      description: ''
       operationId: getUserByName
       parameters:
         - name: username
           in: path
-          description: The name that needs to be fetched
+          description: 'The name that needs to be fetched. Use user1 for testing. '
           required: true
           schema:
             type: string
@@ -461,9 +547,12 @@ paths:
         '200':
           description: successful operation
           content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
             application/json:
               schema:
-                $ref: 'user.yaml#/components/schemas/User'
+                $ref: '#/components/schemas/User'
         '400':
           description: Invalid username supplied
         '404':
@@ -472,6 +561,7 @@ paths:
       tags:
         - user
       summary: Update user
+      x-swagger-router-controller: UserController
       description: This can only be done by the logged in user.
       operationId: updateUser
       parameters:
@@ -489,7 +579,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: 'user.yaml#/components/schemas/User'
+              $ref: '#/components/schemas/User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
     delete:
       tags:
         - user
