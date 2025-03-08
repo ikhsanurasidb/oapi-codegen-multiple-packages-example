@@ -1,8 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
-package: gen_pet
-output: ../../gen/pet/pet_models.go
+package: pet
+output: ../../dto/pet/pet_models.go
 generate:
   models: true
+  embedded-spec: true
 output-options:
   # to make sure that all types are generated
   skip-prune: true
@@ -13,4 +14,3 @@ output-options:
     - Address
     - Order
     - User
-    - UserArray

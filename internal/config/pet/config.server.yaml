@@ -1,8 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
-package: gen_pet
-output: ../../gen/pet/pet_server.go
+package: pet
+output: ../../server/pet/pet_server.go
 generate:
   gin-server: true
+  embedded-spec: true
 output-options:
   # to make sure that all types are generated
   skip-prune: true
