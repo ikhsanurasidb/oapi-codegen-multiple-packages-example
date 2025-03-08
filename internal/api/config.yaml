@@ -5,11 +5,10 @@ pet-server:
   package: pet
   output: ../server/pet/pet_server.go
   output-options:
-    # skip-prune: true
     include-tags:
       - pet
   import-mapping:
-    pet.yaml: github.com/ikhsanurasidb/oapi-codegen-multiple-packages-example/internal/dto/pet
+    : github.com/ikhsanurasidb/oapi-codegen-multiple-packages-example/internal/dto/pet
   
 pet-models:
   generate:
@@ -26,7 +25,6 @@ pet-models:
       - Address
       - Order
       - User
-      - UserArray
 
 store-server:
   generate:
@@ -39,7 +37,7 @@ store-server:
     include-tags:
       - store
   import-mapping:
-    store.yaml: github.com/ikhsanurasidb/oapi-codegen-multiple-packages-example/internal/dto/store
+    ./store.yaml: github.com/ikhsanurasidb/oapi-codegen-multiple-packages-example/internal/dto/store
 
 store-models:
   generate:
@@ -58,7 +56,7 @@ store-models:
       - Customer
       - Address
       - User
-      - UserArray
+      - ApiResponse
 
 user-server:
   generate:
@@ -71,7 +69,7 @@ user-server:
     include-tags:
       - user
   import-mapping:
-    user.yaml: github.com/ikhsanurasidb/oapi-codegen-multiple-packages-example/internal/dto/user
+    ./user.yaml: github.com/ikhsanurasidb/oapi-codegen-multiple-packages-example/internal/dto/user
 
 user-models:
   generate:

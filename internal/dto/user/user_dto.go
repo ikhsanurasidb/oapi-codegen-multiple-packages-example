@@ -13,11 +13,24 @@ import (
 	"strings"
 
 	"github.com/getkin/kin-openapi/openapi3"
-	externalRef0 "github.com/ikhsanurasidb/oapi-codegen-multiple-packages-example/internal/dto/user"
 )
 
+// User defines model for User.
+type User struct {
+	Email     *string `json:"email,omitempty"`
+	FirstName *string `json:"firstName,omitempty"`
+	Id        *int64  `json:"id,omitempty"`
+	LastName  *string `json:"lastName,omitempty"`
+	Password  *string `json:"password,omitempty"`
+	Phone     *string `json:"phone,omitempty"`
+
+	// UserStatus User Status
+	UserStatus *int32  `json:"userStatus,omitempty"`
+	Username   *string `json:"username,omitempty"`
+}
+
 // CreateUsersWithListInputJSONBody defines parameters for CreateUsersWithListInput.
-type CreateUsersWithListInputJSONBody = []externalRef0.User
+type CreateUsersWithListInputJSONBody = []User
 
 // LoginUserParams defines parameters for LoginUser.
 type LoginUserParams struct {
@@ -29,53 +42,60 @@ type LoginUserParams struct {
 }
 
 // CreateUserJSONRequestBody defines body for CreateUser for application/json ContentType.
-type CreateUserJSONRequestBody = externalRef0.User
+type CreateUserJSONRequestBody = User
 
 // CreateUserFormdataRequestBody defines body for CreateUser for application/x-www-form-urlencoded ContentType.
-type CreateUserFormdataRequestBody = externalRef0.User
+type CreateUserFormdataRequestBody = User
 
 // CreateUsersWithListInputJSONRequestBody defines body for CreateUsersWithListInput for application/json ContentType.
 type CreateUsersWithListInputJSONRequestBody = CreateUsersWithListInputJSONBody
 
 // UpdateUserJSONRequestBody defines body for UpdateUser for application/json ContentType.
-type UpdateUserJSONRequestBody = externalRef0.User
+type UpdateUserJSONRequestBody = User
 
 // UpdateUserFormdataRequestBody defines body for UpdateUser for application/x-www-form-urlencoded ContentType.
-type UpdateUserFormdataRequestBody = externalRef0.User
+type UpdateUserFormdataRequestBody = User
 
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"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",
+	"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",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file
@@ -115,12 +135,6 @@ func PathToRawSpec(pathToFile string) map[string]func() ([]byte, error) {
 		res[pathToFile] = rawSpec
 	}
 
-	for rawPath, rawFunc := range externalRef0.PathToRawSpec(path.Join(path.Dir(pathToFile), "./user/user.yaml")) {
-		if _, ok := res[rawPath]; ok {
-			// it is not possible to compare functions in golang, so always overwrite the old value
-		}
-		res[rawPath] = rawFunc
-	}
 	return res
 }
 
