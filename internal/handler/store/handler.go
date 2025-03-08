@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	store_dto "github.com/oapi-codegen-multiple-packages-example/internal/dto/store"
-	"github.com/oapi-codegen-multiple-packages-example/internal/service/store"
+	store_dto "github.com/ikhsanurasidb/oapi-codegen-multiple-packages-example/internal/dto/store"
+	"github.com/ikhsanurasidb/oapi-codegen-multiple-packages-example/internal/service/store"
 )
 
 type Handler struct {

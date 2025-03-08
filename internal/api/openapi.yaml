@@ -46,10 +46,10 @@ paths:
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/Pet'
+                $ref: 'pet.yaml#/components/schemas/Pet'
             application/json:
               schema:
-                $ref: '#/components/schemas/Pet'
+                $ref: 'pet.yaml#/components/schemas/Pet'
         '405':
           description: Invalid input
       security:
@@ -62,13 +62,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pet'
+              $ref: 'pet.yaml#/components/schemas/Pet'
           application/xml:
             schema:
-              $ref: '#/components/schemas/Pet'
+              $ref: 'pet.yaml#/components/schemas/Pet'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Pet'
+              $ref: 'pet.yaml#/components/schemas/Pet'
     put:
       tags:
         - pet
@@ -81,10 +81,10 @@ paths:
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/Pet'
+                $ref: 'pet.yaml#/components/schemas/Pet'
             application/json:
               schema:
-                $ref: '#/components/schemas/Pet'
+                $ref: 'pet.yaml#/components/schemas/Pet'
         '400':
           description: Invalid ID supplied
         '404':
@@ -101,13 +101,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pet'
+              $ref: 'pet.yaml#/components/schemas/Pet'
           application/xml:
             schema:
-              $ref: '#/components/schemas/Pet'
+              $ref: 'pet.yaml#/components/schemas/Pet'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Pet'
+              $ref: 'pet.yaml#/components/schemas/Pet'
   /pet/findByStatus:
     get:
       tags:
@@ -136,12 +136,12 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Pet'
+                  $ref: 'pet.yaml#/components/schemas/Pet'
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Pet'
+                  $ref: 'pet.yaml#/components/schemas/Pet'
         '400':
           description: Invalid status value
       security:
@@ -175,12 +175,12 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Pet'
+                  $ref: 'pet.yaml#/components/schemas/Pet'
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Pet'
+                  $ref: 'pet.yaml#/components/schemas/Pet'
         '400':
           description: Invalid tag value
       security:
@@ -208,10 +208,10 @@ paths:
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/Pet'
+                $ref: 'pet.yaml#/components/schemas/Pet'
             application/json:
               schema:
-                $ref: '#/components/schemas/Pet'
+                $ref: 'pet.yaml#/components/schemas/Pet'
         '400':
           description: Invalid ID supplied
         '404':
@@ -306,7 +306,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'
+                $ref: 'pet.yaml#/components/schemas/ApiResponse'
       security:
         - petstore_auth:
             - 'write:pets'
@@ -351,20 +351,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Order'
+                $ref: 'store.yaml#/components/schemas/Order'
         '405':
           description: Invalid input
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Order'
+              $ref: 'store.yaml#/components/schemas/Order'
           application/xml:
             schema:
-              $ref: '#/components/schemas/Order'
+              $ref: 'store.yaml#/components/schemas/Order'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Order'
+              $ref: 'store.yaml#/components/schemas/Order'
   '/store/order/{orderId}':
     get:
       tags:
@@ -389,10 +389,10 @@ paths:
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/Order'
+                $ref: 'store.yaml#/components/schemas/Order'
             application/json:
               schema:
-                $ref: '#/components/schemas/Order'
+                $ref: 'store.yaml#/components/schemas/Order'
         '400':
           description: Invalid ID supplied
         '404':
@@ -432,21 +432,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: 'user.yaml#/components/schemas/User'
             application/xml:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: 'user.yaml#/components/schemas/User'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: 'user.yaml#/components/schemas/User'
           application/xml:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: 'user.yaml#/components/schemas/User'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: 'user.yaml#/components/schemas/User'
         description: Created user object
   /user/createWithList:
     post:
@@ -462,10 +462,10 @@ paths:
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: 'user.yaml#/components/schemas/User'
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: 'user.yaml#/components/schemas/User'
         default:
           description: successful operation
       requestBody:
@@ -474,7 +474,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/User'
+                $ref: 'user.yaml#/components/schemas/User'
   /user/login:
     get:
       tags:
@@ -549,10 +549,10 @@ paths:
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: 'user.yaml#/components/schemas/User'
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: 'user.yaml#/components/schemas/User'
         '400':
           description: Invalid username supplied
         '404':
@@ -579,13 +579,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: 'user.yaml#/components/schemas/User'
           application/xml:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: 'user.yaml#/components/schemas/User'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: 'user.yaml#/components/schemas/User'
     delete:
       tags:
         - user
@@ -608,202 +608,6 @@ externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'
 components:
-  schemas:
-    Order:
-      x-swagger-router-model: io.swagger.petstore.model.Order
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 10
-        petId:
-          type: integer
-          format: int64
-          example: 198772
-        quantity:
-          type: integer
-          format: int32
-          example: 7
-        shipDate:
-          type: string
-          format: date-time
-        status:
-          type: string
-          description: Order Status
-          enum:
-            - placed
-            - approved
-            - delivered
-          example: approved
-        complete:
-          type: boolean
-      xml:
-        name: order
-      type: object
-    Customer:
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 100000
-        username:
-          type: string
-          example: fehguy
-        address:
-          type: array
-          items:
-            $ref: '#/components/schemas/Address'
-          xml:
-            wrapped: true
-            name: addresses
-      xml:
-        name: customer
-      type: object
-    Address:
-      properties:
-        street:
-          type: string
-          example: 437 Lytton
-        city:
-          type: string
-          example: Palo Alto
-        state:
-          type: string
-          example: CA
-        zip:
-          type: string
-          example: 94301
-      xml:
-        name: address
-      type: object
-    Category:
-      x-swagger-router-model: io.swagger.petstore.model.Category
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-        name:
-          type: string
-          example: Dogs
-      xml:
-        name: category
-      type: object
-    User:
-      x-swagger-router-model: io.swagger.petstore.model.User
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 10
-        username:
-          type: string
-          example: theUser
-        firstName:
-          type: string
-          example: John
-        lastName:
-          type: string
-          example: James
-        email:
-          type: string
-          example: john@email.com
-        password:
-          type: string
-          example: 12345
-        phone:
-          type: string
-          example: 12345
-        userStatus:
-          type: integer
-          format: int32
-          example: 1
-          description: User Status
-      xml:
-        name: user
-      type: object
-    Tag:
-      x-swagger-router-model: io.swagger.petstore.model.Tag
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      xml:
-        name: tag
-      type: object
-    Pet:
-      x-swagger-router-model: io.swagger.petstore.model.Pet
-      required:
-        - name
-        - photoUrls
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 10
-        name:
-          type: string
-          example: doggie
-        category:
-          $ref: '#/components/schemas/Category'
-        photoUrls:
-          type: array
-          xml:
-            wrapped: true
-          items:
-            type: string
-            xml:
-              name: photoUrl
-        tags:
-          type: array
-          xml:
-            wrapped: true
-          items:
-            $ref: '#/components/schemas/Tag'
-            xml:
-              name: tag
-        status:
-          type: string
-          description: pet status in the store
-          enum:
-            - available
-            - pending
-            - sold
-      xml:
-        name: pet
-      type: object
-    ApiResponse:
-      properties:
-        code:
-          type: integer
-          format: int32
-        type:
-          type: string
-        message:
-          type: string
-      xml:
-        name: '##default'
-      type: object
-  # requestBodies:
-  #   Pet:
-  #     content:
-  #       application/json:
-  #         schema:
-  #           $ref: '#/components/schemas/Pet'
-  #       application/xml:
-  #         schema:
-  #           $ref: '#/components/schemas/Pet'
-  #     description: Pet object that needs to be added to the store
-  #   UserArray:
-  #     content:
-  #       application/json:
-  #         schema:
-  #           type: array
-  #           items:
-  #             $ref: '#/components/schemas/User'
-  #     description: List of user object
   securitySchemes:
     petstore_auth:
       type: oauth2

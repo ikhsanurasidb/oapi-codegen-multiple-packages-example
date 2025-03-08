@@ -1,6 +1,7 @@
 pet-server:
   generate:
-      gin-server: true
+    gin-server: true
+    embedded-spec: true
   package: pet
   output: ../server/pet/pet_server.go
   output-options:
@@ -8,11 +9,12 @@ pet-server:
     include-tags:
       - pet
   import-mapping:
-    /components/schemas/Pet: github.com/oapi-codegen-multiple-packages-example/internal/dto/pet
+    pet.yaml: github.com/ikhsanurasidb/oapi-codegen-multiple-packages-example/internal/dto/pet
   
 pet-models:
   generate:
-      models: true
+    models: true
+    embedded-spec: true
   package: pet
   output: ../dto/pet/pet_dto.go
   output-options:
@@ -28,7 +30,8 @@ pet-models:
 
 store-server:
   generate:
-      gin-server: true
+    embedded-spec: true
+    gin-server: true
   package: store
   output: ../server/store/store_server.go
   output-options:
@@ -36,11 +39,12 @@ store-server:
     include-tags:
       - store
   import-mapping:
-    /components/schemas/Order: github.com/oapi-codegen-multiple-packages-example/internal/dto/store/
+    store.yaml: github.com/ikhsanurasidb/oapi-codegen-multiple-packages-example/internal/dto/store
 
 store-models:
   generate:
-      models: true
+    models: true
+    embedded-spec: true
   package: store
   output: ../dto/store/store_dto.go
   output-options:
@@ -58,7 +62,8 @@ store-models:
 
 user-server:
   generate:
-      gin-server: true
+    embedded-spec: true
+    gin-server: true
   package: user
   output: ../server/user/user_server.go
   output-options:
@@ -66,11 +71,12 @@ user-server:
     include-tags:
       - user
   import-mapping:
-    /components/schemas/User: github.com/oapi-codegen-multiple-packages-example/internal/dto/user/
+    user.yaml: github.com/ikhsanurasidb/oapi-codegen-multiple-packages-example/internal/dto/user
 
 user-models:
   generate:
-      models: true
+    models: true
+    embedded-spec: true
   package: user
   output: ../dto/user/user_dto.go
   output-options:

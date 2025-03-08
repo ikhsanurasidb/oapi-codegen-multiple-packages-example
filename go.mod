@@ -1,4 +1,4 @@
-module github.com/oapi-codegen-multiple-packages-example
+module github.com/ikhsanurasidb/oapi-codegen-multiple-packages-example
 
 go 1.23.0
 

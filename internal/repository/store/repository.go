@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	store_dto "github.com/oapi-codegen-multiple-packages-example/internal/dto/store"
+	store_dto "github.com/ikhsanurasidb/oapi-codegen-multiple-packages-example/internal/dto/store"
 )
 
 type Repository interface {

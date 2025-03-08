@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 
-	store_dto "github.com/oapi-codegen-multiple-packages-example/internal/dto/store"
-	"github.com/oapi-codegen-multiple-packages-example/internal/repository/store"
+	store_dto "github.com/ikhsanurasidb/oapi-codegen-multiple-packages-example/internal/dto/store"
+	"github.com/ikhsanurasidb/oapi-codegen-multiple-packages-example/internal/repository/store"
 )
 
 type Service interface {

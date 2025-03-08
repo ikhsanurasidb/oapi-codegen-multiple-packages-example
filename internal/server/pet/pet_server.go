@@ -4,10 +4,18 @@
 package pet
 
 import (
+	"bytes"
+	"compress/gzip"
+	"encoding/base64"
 	"fmt"
 	"net/http"
+	"net/url"
+	"path"
+	"strings"
 
+	"github.com/getkin/kin-openapi/openapi3"
 	"github.com/gin-gonic/gin"
+	externalRef0 "github.com/ikhsanurasidb/oapi-codegen-multiple-packages-example/internal/dto/pet"
 	"github.com/oapi-codegen/runtime"
 )
 
@@ -329,4 +337,121 @@ func RegisterHandlersWithOptions(router gin.IRouter, si ServerInterface, options
 	router.GET(options.BaseURL+"/pet/:petId", wrapper.GetPetById)
 	router.POST(options.BaseURL+"/pet/:petId", wrapper.UpdatePetWithForm)
 	router.POST(options.BaseURL+"/pet/:petId/uploadImage", wrapper.UploadFile)
+}
+
+// Base64 encoded, gzipped, json marshaled Swagger object
+var swaggerSpec = []string{
+
+	"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",
+}
+
+// GetSwagger returns the content of the embedded swagger specification file
+// or error if failed to decode
+func decodeSpec() ([]byte, error) {
+	zipped, err := base64.StdEncoding.DecodeString(strings.Join(swaggerSpec, ""))
+	if err != nil {
+		return nil, fmt.Errorf("error base64 decoding spec: %w", err)
+	}
+	zr, err := gzip.NewReader(bytes.NewReader(zipped))
+	if err != nil {
+		return nil, fmt.Errorf("error decompressing spec: %w", err)
+	}
+	var buf bytes.Buffer
+	_, err = buf.ReadFrom(zr)
+	if err != nil {
+		return nil, fmt.Errorf("error decompressing spec: %w", err)
+	}
+
+	return buf.Bytes(), nil
+}
+
+var rawSpec = decodeSpecCached()
+
+// a naive cached of a decoded swagger spec
+func decodeSpecCached() func() ([]byte, error) {
+	data, err := decodeSpec()
+	return func() ([]byte, error) {
+		return data, err
+	}
+}
+
+// Constructs a synthetic filesystem for resolving external references when loading openapi specifications.
+func PathToRawSpec(pathToFile string) map[string]func() ([]byte, error) {
+	res := make(map[string]func() ([]byte, error))
+	if len(pathToFile) > 0 {
+		res[pathToFile] = rawSpec
+	}
+
+	for rawPath, rawFunc := range externalRef0.PathToRawSpec(path.Join(path.Dir(pathToFile), "pet/pet.yaml")) {
+		if _, ok := res[rawPath]; ok {
+			// it is not possible to compare functions in golang, so always overwrite the old value
+		}
+		res[rawPath] = rawFunc
+	}
+	return res
+}
+
+// GetSwagger returns the Swagger specification corresponding to the generated code
+// in this file. The external references of Swagger specification are resolved.
+// The logic of resolving external references is tightly connected to "import-mapping" feature.
+// Externally referenced files must be embedded in the corresponding golang packages.
+// Urls can be supported but this task was out of the scope.
+func GetSwagger() (swagger *openapi3.T, err error) {
+	resolvePath := PathToRawSpec("")
+
+	loader := openapi3.NewLoader()
+	loader.IsExternalRefsAllowed = true
+	loader.ReadFromURIFunc = func(loader *openapi3.Loader, url *url.URL) ([]byte, error) {
+		pathToFile := url.String()
+		pathToFile = path.Clean(pathToFile)
+		getSpec, ok := resolvePath[pathToFile]
+		if !ok {
+			err1 := fmt.Errorf("path not found: %s", pathToFile)
+			return nil, err1
+		}
+		return getSpec()
+	}
+	var specData []byte
+	specData, err = rawSpec()
+	if err != nil {
+		return
+	}
+	swagger, err = loader.LoadFromData(specData)
+	if err != nil {
+		return
+	}
+	return
 }
